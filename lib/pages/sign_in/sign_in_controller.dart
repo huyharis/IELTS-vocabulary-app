@@ -81,15 +81,13 @@ class SignInController extends GetxController {
 
   loginWithGoogle() async {
     try {
-      // DialogManager.instance.showLoading();
+      DialogManager.instance.showLoading();
       await authRepository.loginWithGoogle().then((value) {
-        print('valueeee $value');
-        if (value != null) {
-          DialogManager.instance.hideDialog();
-          Get.snackbar('Success', "Logging in",
-              backgroundColor: Colors.greenAccent);
-          Get.offAllNamed(Routes.home);
-        }
+        DialogManager.instance.hideDialog();
+        Get.snackbar('Success', "Logging in",
+            backgroundColor: Colors.greenAccent);
+        Get.offAllNamed(Routes.home);
+        DialogManager.instance.hideDialog();
       }).catchError((error) {
         DialogManager.instance.hideDialog();
         if (error is AppwriteException) {
