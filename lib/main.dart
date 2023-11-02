@@ -20,20 +20,18 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: GetMaterialApp(
-        initialBinding: BindingsBuilder((){
-          Get.put(DialogManager);
-        }),
-        navigatorKey: navigatorKey,
-        title: 'Flutter Demo',
-        theme: ThemeData(
-          useMaterial3: true,
-        ),
-        initialRoute: AppPages.initial,
-        getPages: AppPages.routes,
-        debugShowCheckedModeBanner: false,
+    return GetMaterialApp(
+      initialBinding: BindingsBuilder(() {
+        Get.put(DialogManager);
+      }),
+      navigatorKey: navigatorKey,
+      title: 'Flutter Demo',
+      theme: ThemeData(
+        useMaterial3: true,
       ),
+      initialRoute: AppPages.initial,
+      getPages: AppPages.routes,
+      debugShowCheckedModeBanner: false,
     );
   }
 }

@@ -2,7 +2,6 @@ import 'package:appwrite/appwrite.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:google_sign_in/google_sign_in.dart';
 import 'package:ielts_vocabulary_app/components/dialog/dialog_manager.dart';
 import 'package:ielts_vocabulary_app/data/repository/auth_repository.dart';
 import 'package:ielts_vocabulary_app/routes/app_pages.dart';
@@ -82,13 +81,15 @@ class SignInController extends GetxController {
 
   loginWithGoogle() async {
     try {
-      DialogManager.instance.showLoading();
+      // DialogManager.instance.showLoading();
       await authRepository.loginWithGoogle().then((value) {
         print('valueeee $value');
-        DialogManager.instance.hideDialog();
-        Get.snackbar('Success', "Logging in",
-            backgroundColor: Colors.greenAccent);
-        Get.offAllNamed(Routes.home);
+        if (value != null) {
+          DialogManager.instance.hideDialog();
+          Get.snackbar('Success', "Logging in",
+              backgroundColor: Colors.greenAccent);
+          Get.offAllNamed(Routes.home);
+        }
       }).catchError((error) {
         DialogManager.instance.hideDialog();
         if (error is AppwriteException) {

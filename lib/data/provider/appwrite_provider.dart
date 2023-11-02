@@ -1,6 +1,5 @@
 import 'package:appwrite/appwrite.dart';
 import 'package:appwrite/models.dart' as models;
-import 'package:google_sign_in/google_sign_in.dart';
 import 'package:ielts_vocabulary_app/constants/appwrite_constant.dart';
 
 class AppwriteClientProvider {
@@ -42,17 +41,10 @@ class AppwriteClientProvider {
   }
 
   Future<models.User?> loginWithGoogle() async {
-    final googleSignIn = GoogleSignIn(scopes: ['email']);
     try {
-      final GoogleSignInAccount? googleUser = await googleSignIn.signIn();
-      if (googleUser == null) {
-        return null; // Sign-in canceled
-      }
-      final result = await account?.createOAuth2Session(
-        provider: 'google',
-      );
+      final response = await account?.createOAuth2Session(provider: 'google');
 
-      return result.user;
+      return response;
     } catch (e) {
       print('Google Sign-In Error: $e');
       return null;

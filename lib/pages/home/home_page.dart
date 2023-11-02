@@ -15,7 +15,7 @@ class HomePage extends GetView<HomeController> {
         (state) => Column(
           children: [
             _appBar(),
-            _body(context, controller, state),
+            Expanded(child: _body(context, controller, state)),
           ],
         ),
       ),
@@ -52,7 +52,7 @@ class HomePage extends GetView<HomeController> {
       BuildContext context, HomeController controller, List<Topic>? list) {
     return Container(
       width: double.infinity,
-      height: 580,
+      height: 480,
       margin: const EdgeInsets.only(top: 38.0),
       padding: const EdgeInsets.symmetric(horizontal: 16.0),
       child: SingleChildScrollView(
@@ -223,6 +223,7 @@ class HomePage extends GetView<HomeController> {
         child: Column(
           children: [
             Container(
+              padding: EdgeInsets.only(top: 32.0),
               margin: const EdgeInsets.only(bottom: 27.0),
               child: _flagAndScore(),
             ),
